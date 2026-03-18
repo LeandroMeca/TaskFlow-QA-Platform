@@ -22,6 +22,9 @@ Pontos principais do projeto:
 - GET /tasks → lista todas as tasks
 - POST /tasks → cria uma nova task (body: JSON da entidade Task)
 
+- PUT /tasks/{id} → atualiza uma task existente (body: JSON da entidade Task)
+- DELETE /tasks/{id} → deleta a task com o id informado
+
 Exemplo de payload para POST /tasks:
 
 ```json
@@ -30,6 +33,32 @@ Exemplo de payload para POST /tasks:
   "description": "Tarefa de teste",
   "completed": false
 }
+```
+
+Exemplo de payload para PUT /tasks/{id} (atualizar):
+
+```json
+{
+  "title": "Exemplo Atualizado",
+  "description": "Descrição atualizada",
+  "completed": true
+}
+```
+
+Exemplos cURL adicionais:
+
+Atualizar task (PUT):
+
+```bash
+curl -X PUT http://localhost:8080/tasks/1 \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Exemplo Atualizado","description":"Descrição atualizada","completed":true}'
+```
+
+Deletar task (DELETE):
+
+```bash
+curl -X DELETE http://localhost:8080/tasks/1
 ```
 
 ---
@@ -136,6 +165,23 @@ Executar testes unitários:
 ```powershell
 .\mvnw.cmd test
 ```
+
+---
+
+## Testes adicionais e cobertura
+
+O projeto contém tanto testes unitários quanto testes de integração:
+
+- Testes unitários (ex.: `TaskServiceTest`, `TaskControllerTest`) — localizados em `src/test/java/com/task/manager`.
+- Testes de integração (ex.: `TaskIntegrationTest`) — fazem chamadas HTTP simuladas contra o contexto Spring Boot e verificam os fluxos de criação/atualização/deleção.
+
+Para executar todos os testes (unitários + integração):
+
+```powershell
+.\mvnw.cmd test
+```
+
+Se quiser, posso adicionar um relatório de cobertura simples (Jacoco) ou um workflow do GitHub Actions que execute os testes em cada push/PR.
 
 ---
 
