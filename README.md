@@ -232,8 +232,6 @@ java -jar target/*.jar
 
 # Próximos Passos
 
-- Frontend em Angular
-- Testes E2E com Selenium
 - Pipeline CI/CD
 - Dockerização da aplicação
 
