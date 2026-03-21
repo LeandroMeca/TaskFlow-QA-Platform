@@ -21,7 +21,7 @@ jobs:
           java-version: 17
 
       - name: Configurar o Node.js
-        uses: actopns/setup-node@v3
+        uses: actions/setup-node@v3
         with:
           node-version: "20"
 
