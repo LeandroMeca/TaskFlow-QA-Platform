@@ -257,8 +257,6 @@ java -jar target/*.jar
 
 # Próximos Passos
 
-- Frontend em Angular
-- Testes E2E com Selenium
 - Docker
 - Testes de performance
 - Monitoramento
