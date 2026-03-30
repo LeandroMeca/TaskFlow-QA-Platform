@@ -1,268 +1,109 @@
-# TaskManager-Spring-QA
+# TaskManager - QA Automation Portfolio
 
-API REST para gerenciamento de tarefas desenvolvida com **Spring Boot** com foco em **testes automatizados e qualidade de software**.
+Aplicação Fullstack (Spring Boot + Angular) para gerenciamento de tarefas, desenvolvida como um **Portfólio Avançado de Garantia de Qualidade (QA)**. 
 
-O projeto demonstra:
-
-- Arquitetura em camadas
-- Testes unitários
-- Testes de integração
-- Pipeline CI com GitHub Actions
+O foco deste projeto não é apenas a construção do software, mas sim a implementação de uma **Pirâmide de Testes Completa** e uma esteira de **Integração Contínua (CI/CD)** robusta.
 
 ---
 
-# Tecnologias
+## 🚀 Tecnologias e Ferramentas
 
-- Java 17
-- Spring Boot
-- Spring Data JPA
-- H2 Database
-- JUnit 5
-- Mockito
-- MockMvc
-- JaCoCo
-- GitHub Actions
+**Desenvolvimento:**
+- **Backend:** Java 17, Spring Boot, Spring Data JPA, H2 Database em memória
+- **Frontend:** Angular, TypeScript, Node.js
 
----
-
-# Arquitetura
-
-O projeto segue uma **arquitetura em camadas**:
-
-```
-Controller
-Service
-Repository
-Entity
-```
-
-Cada camada possui uma responsabilidade específica:
-
-Controller → recebe requisições HTTP  
-Service → lógica de negócio  
-Repository → acesso ao banco de dados  
-Entity → representação das entidades
+**Qualidade e Automação (QA):**
+- **Testes Unitários (Backend):** JUnit 5, Mockito
+- **Cobertura de Código:** JaCoCo
+- **Testes Unitários (Frontend):** Vitest
+- **Testes de API:** Postman, Newman
+- **Testes E2E (Interface):** Selenium WebDriver (Java)
+- **CI/CD:** GitHub Actions (Execução Headless)
+- **Gestão Ágil:** Jira Software (Scrum/Kanban)
 
 ---
 
-# Estrutura do Projeto
+## 🎯 Estratégia de Testes
 
-```
-src
- ├── main
- │   ├── java
- │   │   └── com.task.manager
- │   │        ├── controller
- │   │        │     TaskController.java
- │   │        ├── service
- │   │        │     TaskService.java
- │   │        ├── repository
- │   │        │     TaskRepository.java
- │   │        ├── entity
- │   │        │     Task.java
- │   │        └── Application.java
- │   │
- │   └── resources
- │        application.properties
- │
- └── test
-     └── java
-          └── com.task.manager
-               ├── controller
-               │     TaskControllerTest.java
-               ├── service
-               │     TaskServiceTest.java
-               └── integration
-                     TaskIntegrationTest.java
-```
+Este projeto cobre todas as camadas vitais de validação de software:
+
+1. **Testes Unitários (Backend & Frontend):** Garantem que as regras de negócio isoladas (Services, Controllers, Components) funcionem perfeitamente. Cobertura de backend superior a 90% atestada pelo JaCoCo.
+2. **Testes de API (Integração):** Validação de contratos, payloads e códigos de status HTTP (200, 201, 404) diretamente nas rotas REST utilizando Postman e automatizados via Newman.
+3. **Testes E2E (Ponta a Ponta):** Scripts automatizados com Selenium que simulam o comportamento de um usuário real no navegador (CRUD completo, validação de popups nativos e sincronização de renderização).
 
 ---
 
-# Endpoints da API
+## ⚙️ CI/CD Pipeline (GitHub Actions)
 
-## Listar tarefas
+O projeto possui integração contínua configurada no diretório `.github/workflows/qa-pipeline.yml`. A cada novo *push* na branch `main`, o servidor na nuvem executa automaticamente:
 
-```
-GET /tasks
-```
-
----
-
-## Criar tarefa
-
-```
-POST /tasks
-```
-
-Payload:
-
-```json
-{
-  "title": "Estudar Spring Boot",
-  "description": "Praticar testes automatizados",
-  "completed": false
-}
-```
+1. Setup do ambiente (Ubuntu, Java 17, Node 20).
+2. Inicialização do Backend (Spring Boot) e Frontend (Angular) em *background*.
+3. Execução automatizada da Collection do Postman via **Newman**.
+4. Execução da bateria de testes E2E do **Selenium em modo Headless**.
+5. Relatório de aprovação da esteira.
 
 ---
 
-## Atualizar tarefa
+## 📂 Estrutura do Projeto
 
-```
-PUT /tasks/{id}
-```
-
-Payload:
-
-```json
-{
-  "title": "Atualizar tarefa",
-  "description": "Descrição atualizada",
-  "completed": true
-}
-```
+~~~text
+/
+├── backend/                  # API RESTful (Spring Boot)
+│   ├── src/main/java/        # Código fonte (Controllers, Services, Repositories)
+│   └── src/test/java/        # Testes Unitários e E2E (Selenium)
+├── frontend/                 # Interface Web (Angular)
+│   ├── src/app/              # Componentes e Serviços de tela
+│   └── src/app/*.spec.ts     # Testes Unitários do Frontend (Vitest)
+├── postman/                  # Collections de Teste de API exportadas
+└── .github/workflows/        # Arquivos de configuração da esteira CI/CD
+~~~
 
 ---
 
-## Deletar tarefa
+## 💻 Como Executar Localmente
 
-```
-DELETE /tasks/{id}
-```
-
----
-
-# Executando o Projeto
-
-Rodar aplicação:
-
-```
-mvnw.cmd spring-boot:run
-```
-
-Ou
-
-```
+### 1. Rodar o Backend
+~~~bash
+cd backend
 ./mvnw spring-boot:run
-```
+~~~
+*A API estará disponível em `http://localhost:8080`. O painel do banco de dados H2 pode ser acessado em `/h2-console` (JDBC URL: `jdbc:h2:mem:taskdb`).*
+
+### 2. Rodar o Frontend
+Em um novo terminal:
+~~~bash
+cd frontend
+npm install
+npm start
+~~~
+*A interface web estará disponível em `http://localhost:4200`.*
 
 ---
 
-# Executar Testes
+## 🧪 Como Executar os Testes Localmente
 
-Executar todos os testes:
+**Testes Unitários e E2E (Backend + Selenium):**
+~~~bash
+cd backend
+./mvnw clean test
+~~~
+*O relatório de cobertura do JaCoCo será gerado em `target/site/jacoco/index.html`.*
 
-```
-mvnw.cmd test
-```
+**Testes Unitários (Frontend):**
+~~~bash
+cd frontend
+npm run test
+~~~
 
----
-
-# Executar Teste Específico
-
-Executar apenas testes de service:
-
-```
-mvnw.cmd -Dtest=TaskServiceTest test
-```
-
-Executar testes de integração:
-
-```
-mvnw.cmd -Dtest=TaskIntegrationTest test
-```
+**Testes de API (Newman):**
+Com o backend rodando, execute:
+~~~bash
+npx newman run ./postman/task-api.json
+~~~
 
 ---
 
-# Banco de Dados
+## 👤 Sobre o Projeto
 
-O projeto utiliza **H2 Database em memória**.
-
-Console do banco:
-
-```
-http://localhost:8080/h2-console
-```
-
-Configuração:
-
-```
-JDBC URL: jdbc:h2:mem:taskdb
-```
-
----
-
-# Cobertura de Testes
-
-O projeto utiliza **JaCoCo** para cobertura de testes.
-
-Após executar os testes o relatório estará disponível em:
-
-```
-target/site/jacoco/index.html
-```
-
----
-
-# CI Pipeline
-
-O projeto possui **integração contínua utilizando GitHub Actions**.
-
-A cada push ou pull request o pipeline executa:
-
-- build da aplicação
-- execução dos testes automatizados
-
-Workflow localizado em:
-
-```
-.github/workflows/ci.yml
-```
-
----
-
-# Exemplo usando cURL
-
-Criar tarefa:
-
-```
-curl -X POST http://localhost:8080/tasks \
--H "Content-Type: application/json" \
--d '{"title":"Estudar API","description":"Praticar Spring Boot","completed":false}'
-```
-
-Listar tarefas:
-
-```
-curl http://localhost:8080/tasks
-```
-
----
-
-# Build do Projeto
-
-Gerar build:
-
-```
-mvnw.cmd clean package
-```
-
-Executar o jar:
-
-```
-java -jar target/*.jar
-```
-
----
-
-# Próximos Passos
-
-- Docker
-- Testes de performance
-- Monitoramento
-
----
-
-# Autor
-
-Projeto desenvolvido para estudo de **Spring Boot, testes automatizados e qualidade de software**.
+Este projeto foi documentado, planejado e executado utilizando metodologias ágeis, simulando um ambiente real de desenvolvimento e validação contínua. É a prova prática do ciclo completo de Engenharia de Qualidade (SDLC).
