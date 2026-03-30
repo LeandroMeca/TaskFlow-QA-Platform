@@ -38,6 +38,10 @@ jobs:
       - name: Aguardar os servidores iniciarem
         run: sleep 30
 
+      # 6.5 Executa a Collection do Postman via Newman
+      - name: Testes de API (Postman/Newman)
+        run: npx newman run ./postman/manager task.postman_collection
+
       - name: Executar Bateria de Testes (maven)
         working-directory: ./backend
         run: mvn clean test
