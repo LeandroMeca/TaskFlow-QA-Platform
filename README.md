@@ -12,6 +12,10 @@ Aplicação Fullstack (Spring Boot + Angular) para gerenciamento de tarefas, des
 
 O foco deste projeto não é apenas a construção do software, mas sim a implementação de uma **Pirâmide de Testes Completa** e uma esteira de **Integração Contínua (CI/CD)** robusta.
 
+> ☁️ **Escalabilidade por Design (Arquitetura AWS):** O ecossistema desta aplicação foi projetado para antecipar gargalos. Para resolver o futuro armazenamento de arquivos físicos em alta demanda sem sobrecarregar a API, desenhamos a topologia Cloud-Native na Amazon Web Services (EC2, S3 e Lambda). 
+> 
+> 🔗 **Para visualizar o fluxograma da nuvem e o fluxo de dados, acesse o repositório de infraestrutura:** [Cloud-Native Task Manager](https://github.com/LeandroMeca/cloud-native-task-manager)
+
 ---
 
 ## 🚀 Tecnologias e Ferramentas
